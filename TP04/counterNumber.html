@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counting Number</title>
+
+    <style>
+      body {
+        background-color: rgb(85, 99, 53);
+      }
+
+      .parent-container {
+        position: relative;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        top: 30px;
+        background-color: aquamarine;
+        background-color: aquamarine;
+        width: 500px;
+        height: 600px;
+        border-radius: 20px;
+      }
+
+      h1 {
+        position: relative;
+        top: 100px;
+        text-align: center;
+        font-size: 50px;
+      }
+
+      #displayNumber {
+        position: relative;
+        top: 150px;
+        text-align: center;
+        font-size: 6rem;
+      }
+
+      #button-wrapper {
+        position: relative;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        top: 230px;
+      }
+      button {
+        background-color: #555555;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent-container">
+      <h1>Counter</h1>
+      <div id="displayNumber">0</div>
+      <div id="button-wrapper">
+        <button id="decreaseButton" type="button">Decrease</button>
+        <button id="resetButton" type="button">Reset</button>
+        <button id="increaseButton" type="button">Increase</button>
+      </div>
+    </div>
+    <script>
+      
+      let displayNumber = document.querySelector("#displayNumber");
+      let decreaseBtn = document.querySelector("#decreaseButton");
+      let increaseBtn = document.querySelector("#increaseButton");
+      let resetBtn = document.querySelector("#resetButton");
+
+
+      let count = 0;
+      increaseBtn.addEventListener("click", () => {
+        count++;
+        updateDisplay();
+      });
+
+      decreaseBtn.addEventListener("click", () => {
+        count--;
+        updateDisplay();
+      });
+
+      resetBtn.addEventListener("click",()=>{
+        count=0;
+        updateDisplay();
+      });
+
+      function updateDisplay() {
+        localStorage.setItem("number",count);
+        let getNumber = localStorage.getItem("nusadomber");
+        displayNumber.innerHTML = getNumber;
+        console.log(getNumber);
+      }
+    </script>
+  </body>
+</html>
