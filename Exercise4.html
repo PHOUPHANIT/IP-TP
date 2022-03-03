@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            display: flex;
+            justify-content: center;
+            width: 400px;
+            height: 400px;
+            background-color: gray;
+            text-align: center;
+            align-items: center;
+        }
+        .drop{
+            padding-right: 20px;
+            animation-fill-mode: forwards;
+           animation: drop 4s ease-in-out;
+           animation-delay: calc(var(--order) * 1000ms);
+        }
+        @keyframes drop{
+            from{
+                transform: translateY(-100px);
+            }
+            to{
+                translate: translateY(0px)
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <span class="drop" style="--order: 1">🙂</span>
+        <span class="drop" style="--order: 2">😊</span>
+        <span class="drop" style="--order: 3">😇</span>
+    </div>
+</body>
+</html>
