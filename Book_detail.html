@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Detail</title>
+</head>
+<body>
+
+    <h5>Book Detail</h5>
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const bookId = urlParams.get('bookid');
+
+        fetch(`https://jsonplaceholder.typicode.com/photos/${bookId}`)
+          .then((res)=>res.json())
+          .then((jsonObj)=>{
+              console.log(jsonObj);
+          })
+
+    </script>
+</body>
+</html>

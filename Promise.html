@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise</title>
+  </head>
+  <body>
+    <div class="input">
+      <input type="text" name="" id="inputNumber" />
+      <button id="find">Find</button>
+    </div>
+    <br />
+    <div id="displayData"></div>
+
+    <script>
+      const db1 = {
+        1: { id: 1, sex: "M", pic: "😀" },
+        4: { id: 4, sex: "F", pic: "😆" },
+        6: { id: 6, sex: "M", pic: "🥰" },
+      };
+
+      const db2 = {
+        2: { id: 2, sex: "M", pic: "😡" },
+        5: { id: 5, sex: "F", pic: "🤑" },
+      };
+
+      const db3 = {
+        3: { id: 3, sex: "M", pic: "😑" },
+      };
+
+      const metaData = {
+        1: "db1",
+        2: "db2",
+        3: "db3",
+        4: "db1",
+        5: "db2",
+        6: "db1",
+      };
+
+      const userData = {
+        1: { name: "Boupha", age: 18, private: false },
+        2: { name: "Phanit", age: 20, private: true },
+        3: { name: "Raksa", age: 28, private: false },
+        4: { name: "Tola", age: 19, private: false },
+        5: { name: "SreyPich", age: 18, private: true },
+        6: { name: "Dara", age: 18, private: false },
+        7: { name: "Chivorn", age: 18, private: true },
+      };
+
+      const element = document.getElementById("find");
+      element.addEventListener("click", function () {
+        const getInput = document.getElementById("inputNumber").value;
+        document.getElementById("displayData").innerHTML = getInput ;
+      });
+
+      var promiseDb1 = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve(db1);
+        }, 2000);
+      });
+      var promiseDb2 = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve(db2);
+        }, 2000);
+      });
+      var promiseDb3 = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve(db3);
+        }, 2000);
+      });
+
+      var metaPromise = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve(metaData);
+        }, 2000);
+      });
+      var userPromise = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve(userData);
+        }, 2000);
+      });
+
+      Promise.all([promiseDb1, promiseDb2, promiseDb3]).then(function (result) {
+
+      });
+    </script>
+  </body>
+</html>
