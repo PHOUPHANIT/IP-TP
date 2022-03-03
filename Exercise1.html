@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagination Infinit Scroll</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        width: 500px;
+        height: 700px;
+        background-color: gray;
+        padding: 5px;
+      }
+      #scrollable {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+      }
+      .item {
+        height: 100px;
+        background-color: white;
+        padding: 5px;
+        border-radius: 3px;
+        margin-bottom: 3px;
+      }
+      #loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 5px solid blue;
+        border-right: 5px solid green;
+        border-bottom: 5px solid red;
+        border-left: 5px solid pink;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        position: absolute;
+        left: 47%;
+        top: 640px;
+        display: none;
+      }
+
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="displayPageNum">0</h1>
+    <div class="container">
+      <div id="scrollable"></div>
+      <div id="loader"></div>
+    </div>
+    <script>
+      let loading = false;
+      let currPageNum = 0;
+      let limitPage = 2871;
+
+      const scroller = document.getElementById("scrollable");
+      scroller.addEventListener("scroll", onScroll);
+      const Fetch = () => {
+        return new Promise((resovle, reject) => {
+          setTimeout(() => {
+            resovle(true);
+          }, 3000);
+        });
+      };
+
+      const loadData = () => {
+        loading = true;
+        console.log("Loading....","Page:", currPageNum);
+        document.getElementById("displayPageNum").innerHTML=currPageNum+1;
+        getDataFromAPI(currPageNum);
+        Fetch().then(() => {
+          loading = false;
+          currPageNum++;
+          console.log("loading done.");
+          //reader HTML
+        });
+      };
+      function onScroll(evt) {
+        const { clientHeight, scrollHeight, scrollTop } = scroller;
+        if (clientHeight + scrollTop + 200 >= scrollHeight && !loading &&currPageNum<=limitPage) {
+              loadData()
+              document.getElementById("loader").style.display="block";
+                 setTimeout(()=>{
+                    document.getElementById("loader").style.display="none";
+                 },2000);   
+        }
+      }
+      //page0
+      loadData();
+      
+      function getDataFromAPI(currPageNum) {
+        fetch(
+          `https://api.instantwebtools.net/v1/passenger?page=${currPageNum}&size=${10}`
+        ).then(async (res) => {
+          let data = await res.json();
+          outPut(data);
+          console.log(data);
+        });
+      }
+      let dataOutput = "Get data from API.";
+      function outPut(data) {
+        for (let r of data.data) {
+          dataOutput += `
+                 <div class="item">ID: ${r._id} 
+                    <br>Name: ${r.name}
+                    <br>__V: ${r.__v}
+                    <br>Trips: ${r.trips}
+                 </div>                 
+                 `;
+        }
+        scroller.innerHTML = dataOutput;
+      }
+    </script>
+  </body>
+</html>
