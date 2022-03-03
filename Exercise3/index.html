@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam</title>
+    <style>
+        body {
+            background-color: rgba(97, 105, 122, 0.5);
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        #canvasInput,
+        #canvasOutput {
+            align-items: center;
+            border: 10px solid rgba(230, 52, 8, 0.7);
+            background-color: rgba(88, 144, 255, 0.4);
+        }
+        
+        #canvasOutput {
+            margin-left: 17px;
+        }
+        
+        .output {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .output>span {
+            background-color: rgba(49, 203, 214, 0.7);
+            height: 20px;
+            color: #fafafa;
+            padding: 10px;
+            font-size: large;
+        }
+        
+        .control {
+            background-color: rgba(60, 49, 214, 0.7);
+            width: 620px;
+        }
+        
+        .control>span {
+            color: #fafafa;
+        }
+        
+        .control>div>button {
+            margin-bottom: 5px;
+            color: #fafafa;
+            border: 2px solid #fafafa;
+            border-radius: 5%;
+            margin-top: 3px;
+        }
+        
+        #start {
+            background-color: rgba(24, 119, 242, 1);
+        }
+        
+        #stop {
+            background-color: rgba(244, 67, 54, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <center>
+                <video autoplay hidden></video>
+                <canvas width="600" height="480" id="canvasInput"></canvas>
+                <div class="control">
+                    <span>Canvas 🤣 : Show your cute face here!</span>
+                    <div>
+                        <button id="start">Start</button>
+                        <button id="stop" hidden>Stop</button>
+                    </div>
+                </div>
+            </center>
+        </div>
+        <div class="output">
+            <span>Mini project with canvas and opencv.js</span>
+            <canvas width="600" height="480" id="canvasOutput"></canvas>
+        </div>
+    </div>
+
+    <script src="./video.js"></script>
+</body>
+
+</html>
