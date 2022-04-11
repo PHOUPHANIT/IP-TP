@@ -34,4 +34,4 @@ router.post('/delete', auth.ensureSignedIn, async (req, res, next) => {
   res.json(result);
 })
 
-module.exports = router
+module.exports = router //
